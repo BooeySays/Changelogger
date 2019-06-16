@@ -1,7 +1,10 @@
 #!/bin/bash
 
+__version__=1.0.1
+
+## BEG - Sets tabslaces to 4 spaces ##
 tabs 4
-__version__=1.0
+## END - Sets tabslaces to 4 spaces ##
 
 function __newcl_title(){
 	clear
@@ -73,6 +76,7 @@ Here's the first 10 lines of the current CHANGELOG file:
 		__newcl_notfound
 	fi
 }
+
 
 
 #	
