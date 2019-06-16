@@ -1,0 +1,83 @@
+#!/bin/bash
+
+tabs 4
+__version__=1.0
+
+function __newcl_title(){
+	clear
+	echo -en """ CHANGELOG Updater v"$__version__" \n"""
+	printf "\e[01;38;5;196m"
+	printf '⎺%.s' $(seq 1 $COLUMNS)
+	printf "\e[m\n"
+}
+
+function __newcl_notfound(){
+	__newcl_title
+	echo -en """
+ERROR: ./CHANGELOG was not found.
+
+newcl needs to be run in the directory where
+the CHANGELOG file is located.
+
+You are currently in $PWD. If this is not the
+correct directory, then you can exit and run
+newcl again after changing into the correct
+dir.
+
+Otherwise, you can create a new CHANGELOG file
+now.
+
+What would you like to do?
+
+  [1]	Re-run newcl later
+  [2]	Create a new CHANGELOG file now
+
+: """
+	read -n 1 -r NOTFOUND_CHOICE
+	case $NOTFOUND_CHOICE in
+	1)
+		break
+		;;
+	2)
+		__newcl_createnewfile
+		;;
+	*)
+		echo -en """
+ERROR: Invalid Selection
+
+[ Press any key to try again, or CTRL + C to exit ]
+
+"""
+		read -n 1
+		__newcl_notfound
+		;;
+	esac
+}
+
+function __newcl_showlog(){
+	if [ -f ./CHANGELOG ]; then
+		echo -en """
+Here's the first 10 lines of the current CHANGELOG file:
+"""
+		catnum=1
+		while IFS= read -r CHLOG; do
+			while [ $catnum -lt 11 ]; do
+				printf "\033[01;37m" # color green
+				printf "$catnum\t" # color green
+				printf "\033[01;32m" # color green
+				printf "$CHLOG\n"
+				catnum=$[$catnum + 1]
+			done
+		done < ./CHANGELOG
+	else
+		__newcl_notfound
+	fi
+}
+
+
+#	
+#if [ -f ./CHANGELOG ]; then
+#	echo -en """
+#]
+
+
