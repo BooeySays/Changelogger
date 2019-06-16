@@ -1,0 +1,10 @@
+ＣＨＡＮＧＥＬＯＧ  ：
+
+v1.0.1
+  -	Added tab command at the beginning
+  	of the script to set the tab spaces
+  	to 4.
+  	
+v1.0	061519
+  -	Created newcl script and started
+  	working on a few functions
