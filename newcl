@@ -6,6 +6,13 @@ __version__=1.0.1
 tabs 4
 ## END - Sets tabslaces to 4 spaces ##
 
+function __newcl_create_new_changelog(){
+	if [ ! -f ./CHANGELOG ]; then
+		echo -en """ＣＨＡＮＧＥＬＯＧ  ：
+
+""" > ./CHANGELOG
+}
+
 function __newcl_title(){
 	clear
 	echo -en """ CHANGELOG Updater v"$__version__" \n"""
